@@ -1,0 +1,312 @@
+Enter password: *************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.17 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cs157a             |
+| diningdb           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use diningdb
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_diningdb |
++--------------------+
+| customer           |
+| employee           |
+| itemdetails        |
+| menu               |
+| order_at           |
+| orders             |
+| payment            |
+| restaurant         |
+| set_order_status   |
+| shift_record       |
+| top_ten            |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> describe customer;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| CustomerID | int(10)     | NO   | PRI | NULL    |       |
+| Name       | varchar(45) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer CustomerID, Name;
+ERROR 1146 (42S02): Table 'diningdb.name' doesn't exist
+mysql> select nid, CustomerID from customer
+    -> ;
+ERROR 1054 (42S22): Unknown column 'nid' in 'field list'
+mysql> select * from customer;
++------------+-------------------+
+| CustomerID | Name              |
++------------+-------------------+
+|          1 | Tomas Frank       |
+|          2 | Itoro Tafani      |
+|          3 | Jenaro Brice      |
+|          4 | Leonor Delacroix  |
+|          5 | Seo-Jun Valentini |
+|          6 | Peter Smith       |
+|          7 | Narayana Chance   |
+|          8 | Madlyn Arriola    |
+|          9 | Sudheer Fortuin   |
+|         10 | Violeta Herberts  |
+|         11 | Eduard Comtois    |
+|         12 | Lauren Tiller     |
+|         13 | Norman Aleppo     |
+|         14 | Evette Cuoco      |
+|         15 | Sara Tran         |
++------------+-------------------+
+15 rows in set (0.01 sec)
+
+mysql> select * from employee;
++------------+------------------------+-----------------+------------+--------------------+
+| EmployeeID | Position               | Password        | Phone      | Name               |
++------------+------------------------+-----------------+------------+--------------------+
+|          1 | chef                   | 039adfsd        | 1097683784 | John Smith         |
+|          2 | sous chef              | jadgfsfg        | 1097683784 | Perry Tyler        |
+|          3 | sous chef              | password        | 1852939790 | Jane Fonda         |
+|          4 | pastry chef            | oejfkg          | 3679230100 | George Obama       |
+|          5 | manager                | 3ajfsdlfjas     | 2403179879 | Samuel Rockafeller |
+|          6 | assistant manager      | TreeCoverings12 | 8587135914 | Aladin Thompson    |
+|          7 | accountant             | ilovecoffee     | 4273536119 | Peter Johnson      |
+|          8 | publicist              | monkeymonkey    | 6145768001 | Michael Fox        |
+|          9 | assistant manager      | avgAndyEatsDirt | 7181439104 | Mulan Lynn         |
+|         10 | line chef              | November23      | 2471836854 | Trina McKenna      |
+|         11 | line chef              | password87654   | 8969226715 | Kay Smith          |
+|         12 | customer service staff | asdfjkl         | 2044421504 | Bill Lynndon       |
+|         13 | technician             | fubiaw3w        | 9213347861 | Katrina Lee        |
+|         14 | customer service staff | 1234567890      | 3250544003 | Chez Wong          |
+|         15 | line chef              | SchoolSchool?   | 9778650229 | Bobby Flay         |
++------------+------------------------+-----------------+------------+--------------------+
+15 rows in set (0.00 sec)
+
+mysql> select * from itemdetails;
++-------------+----------+------------+
+| OrderSerial | Quantity | ItemStatus |
++-------------+----------+------------+
+| 1ielb5      |       32 | available  |
+| 33drtq      |       90 | available  |
+| 4hgws5      |        5 | available  |
+| f4brnd      |       83 | available  |
+| hgw9f5      |       93 | available  |
+| j0e47c      |       12 | available  |
+| lg8oz6      |       29 | available  |
+| nftl3v      |       30 | available  |
+| oqe88q      |        8 | available  |
+| oqynh2      |       23 | available  |
+| psz1mp      |       92 | available  |
+| t6o7z0      |        1 | available  |
+| uu8j01      |       38 | available  |
+| xt6aey      |       53 | available  |
+| xucmgh      |       50 | available  |
++-------------+----------+------------+
+15 rows in set (0.00 sec)
+
+mysql> select * from menu
+    -> ;
++--------+-------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
+| ItemID | Name              | Price | Category | Descrtiption                                                                                                             |
++--------+-------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
+| 3oa17a | banh mi           |   5.4 | entree   | a sandwich made of a baguette, filled with meat, pickled vegetables, and chili peppers                                   |
+| 4wyje3 | sausage pizza     |  14.4 | entree   | flat, round base of dough baked with a topping of tomato sauce and cheese, and sausage                                   |
+| 8q695q | beer              |   3.4 | alcohol  |  alcoholic drink made from yeast-fermented malt flavored with hops                                                       |
+| avrlpb | champagne         |     6 | alcohol  | sparkling wine                                                                                                           |
+| bpejze | pad see ew        | 11.45 | entree   | chinese stir fried noodle                                                                                                |
+| e83w47 | taiyaki           |  3.25 | dessert  | japanese fish-shaped cake with red bean filling                                                                          |
+| fd7rz1 | bibimbap          |  12.5 | entree   | Korean dish consisting of rice topped with sautéed vegetables, chili paste, and beef                                     |
+| hwphjb | butter chicken    | 13.75 | entree   | Indian dish of chicken in a mildly spiced tomato sauce                                                                   |
+| l6pw14 | Sauerbraten       | 11.35 | entree   | German pot roast                                                                                                         |
+| li4y0i | coq au vin        |  14.4 | entree   | French dish of chicken braised with wine, lardons, mushrooms, and optionally garlic                                      |
+| pqq21i | cheese burger     |   8.8 | entree   | two beef patties with cheddar cheese, lettuce, pickles in a sesame bun                                                   |
+| qpc3v0 | chocolate cake    |   3.4 | dessert  | chocolate, ganache, caramel sponge cake                                                                                  |
+| vqem07 | tres leches cake  |   3.4 | dessert  | a butter cake?soaked in evaporated milk, condensed milk, and heavy cream                                                 |
+| w3h9go | mango sticky rice |   3.5 | dessert  | Thai dessert made with glutinous rice, fresh mango and coconut milk                                                      |
+| wet59q | tiramisu          |  4.25 | dessert  | ladyfingers dipped in coffee, layered with a whipped mixture of eggs, sugar, and mascarpone cheese, flavoured with cocoa |
++--------+-------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
+15 rows in set (0.01 sec)
+
+mysql> select * from order_at;
++---------+---------+
+| OrderID | StoreID |
++---------+---------+
+|       1 |       1 |
+|       1 |       2 |
+|       2 |       2 |
+|       2 |       3 |
+|       3 |       1 |
+|       4 |      15 |
+|       8 |       2 |
+|       9 |       5 |
+|      10 |       4 |
+|      10 |       6 |
+|      10 |      11 |
+|      11 |      10 |
+|      12 |       9 |
+|      12 |      10 |
+|      13 |      15 |
++---------+---------+
+15 rows in set (0.00 sec)
+
+mysql> select * from orders;
++---------+-------------+-------+----------+
+| OrderID | OrderStatus | Total | Time     |
++---------+-------------+-------+----------+
+|       1 | in queue    |  30.2 | 12:00:00 |
+|       2 | in queue    | 55.32 | 12:00:05 |
+|       3 | in queue    | 23.38 | 12:00:44 |
+|       4 | in queue    | 85.62 | 13:00:56 |
+|       5 | in queue    | 30.87 | 14:05:03 |
+|       6 | in queue    | 23.88 | 14:33:07 |
+|       7 | in queue    | 25.32 | 14:46:32 |
+|       8 | in queue    |  78.9 | 15:02:37 |
+|       9 | in queue    |    40 | 15:12:04 |
+|      10 | in queue    |  18.2 | 16:25:38 |
+|      11 | in queue    | 88.28 | 16:50:17 |
+|      12 | in queue    | 25.99 | 16:54:28 |
+|      13 | in queue    |  8.45 | 17:00:08 |
+|      14 | in queue    | 90.03 | 18:00:01 |
+|      15 | in queue    |  56.4 | 18:22:18 |
++---------+-------------+-------+----------+
+15 rows in set (0.00 sec)
+
+mysql> select * from payment;
++-----------+------------------+------------------+--------+--------+-------+
+| PaymentID | CardNo           | Type             | Amount | Change | Tips  |
++-----------+------------------+------------------+--------+--------+-------+
+|    140379 | 2061517599864948 | cash             |     60 |      0 |     3 |
+|    249838 | 7684768309251244 | credit           |  28.44 |      0 |     2 |
+|    277891 | 4394440918530475 | cash             |   47.7 |    1.3 |   2.3 |
+|    335426 | 0885446809315021 | credit           |  29.44 |      0 |     2 |
+|    361628 | 6917973617339230 | credit           |  33.99 |      0 |     2 |
+|    403957 | 2227509892485208 | cash             |  56.78 |   0.22 |     5 |
+|    436720 | 5261331155607011 | credit           |  63.44 |      0 |  5.88 |
+|    538990 | 1684497547761045 | credit           |  38.29 |      0 |     0 |
+|    540746 | 5807303818176282 | checking account |  52.33 |      0 |     2 |
+|    696126 | 2775950314411330 | checking account |  11.44 |      0 |     2 |
+|    717745 | 7880483401685193 | checking account |  23.44 |      0 | 20.22 |
+|    826158 | 4224069356535604 | credit           |  45.44 |      0 |     2 |
+|    834991 | 8534358582843519 | checking account |  23.44 |      0 |     2 |
+|    999074 | 7926387999702368 | checking account |  23.44 |      0 |     2 |
+|    999682 | 8534358582843519 | checking account |  23.44 |      0 |     2 |
++-----------+------------------+------------------+--------+--------+-------+
+15 rows in set (0.01 sec)
+
+mysql> select * from restaurant;
++---------+---------------------------+----------------------------------------------+------------+
+| StoreID | Name                      | Address                                      | Phone      |
++---------+---------------------------+----------------------------------------------+------------+
+|       1 | Boba bar                  | 9366 Illinois Court Sheboygan WI 53081       | 8842241174 |
+|       2 | Rosie NY Pizza            | 377 Santana Row San Jose CA 95126            | 7259306174 |
+|       3 | Siena Bistro              | 911 Linda Dr.
+Holly Springs NC 27540         | 5954707376 |
+|       4 | The Table                 | 8965 Oklahoma Street
+Monsey NY 10952         | 2475726066 |
+|       5 | Vin Santo Ristorante      | 7460 Old Rockville St.
+Buckeye AZ 85326      | 6144573165 |
+|       6 | Braise Willow Glen        | 760 Broad Drive
+Trenton NJ 08610             | 4530356344 |
+|       7 | Anchors Fish & Chips      | 93 Cherry Court
+Piqua OH 45356               | 1212011212 |
+|       8 | Black Sheep Brasserie     | 47 Cemetery St.
+Ronkonkoma NY 11779          | 9393668500 |
+|       9 | Bao Chinese Eats          | 9943 53rd Ave.
+Indianapolis IN 46201         | 3194819151 |
+|      10 | Aqui Cal Mex              | 4 Inverness Avenue
+Nashville TN 37205        | 7981025600 |
+|      11 | Bertucellis La Villa      | 9251 Homewood Lane
+Ridgecrest CA 93555       | 9790987356 |
+|      12 | Orchard City Kitchen      | 8053 Charles Ave.
+Shakopee MN 55379          | 3789626626 |
+|      13 | Souvlakis Greek Skewers   | 293 Manor Station Street
+Long Beach NY 11561 | 5569877610 |
+|      14 | Sweet Mango               | 560 Rose Drive
+New Lenox IL 60451            | 5955091733 |
+|      15 | the Funny Farm Restaurant | 146 East Bay Meadows St.
+Miami FL 33125      | 7751252355 |
++---------+---------------------------+----------------------------------------------+------------+
+15 rows in set (0.00 sec)
+
+mysql> select * from set_order_status;
++----------+---------+
+| EmployID | OrderID |
++----------+---------+
+|        1 |       4 |
+|        1 |      12 |
+|        2 |       9 |
+|        5 |       2 |
+|        5 |       4 |
+|        6 |       7 |
+|        7 |       3 |
+|        8 |       1 |
+|        9 |       3 |
+|        9 |      10 |
+|       11 |      10 |
+|       12 |      10 |
+|       12 |      12 |
+|       14 |      14 |
+|       15 |       2 |
++----------+---------+
+15 rows in set (0.00 sec)
+
+mysql> select * from shift_record;
++---------------+-------------+
+| startWorkTime | endWorkTime |
++---------------+-------------+
+|         10000 | 070000.     |
+|         13000 | 073000.     |
+|         90000 | 170000.     |
+|         90000 | 170000.     |
+|         93000 | 173000.     |
+|         93000 | 173000.     |
+|         50000 | 120000.     |
+|         50000 | 120000.     |
+|        100000 | 180000.     |
+|        100000 | 180000.     |
+|        120000 | 200000.     |
+|        120000 | 203000.     |
+|        123000 | 203000.     |
+|        160000 | 220000.     |
+|        163000 | 220000.     |
+|        160000 | 220000.     |
++---------------+-------------+
+16 rows in set (0.01 sec)
+
+mysql> select * from top_ten;
++--------+---------+
+| ItemID | Ranking |
++--------+---------+
+| 3oa17a |      10 |
+| 8q695q |       3 |
+| avrlpb |       9 |
+| bpejze |       8 |
+| e83w47 |       2 |
+| hwphjb |       5 |
+| l6pw14 |       7 |
+| pqq21i |       6 |
+| w3h9go |       4 |
+| wet59q |       1 |
++--------+---------+
+10 rows in set (0.01 sec)
