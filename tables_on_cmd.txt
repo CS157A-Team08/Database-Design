@@ -310,3 +310,6 @@ mysql> select * from top_ten;
 | wet59q |       1 |
 +--------+---------+
 10 rows in set (0.01 sec)
+
+
+a
